@@ -1,11 +1,16 @@
+from collections import OrderedDict
 
-ContactDetails = {}
+ContactDetails = dict()
 
 def checkUserExist(name):
     for c in ContactDetails.keys():
         if c == name:
             return True;
     return False
+
+def manageUser():
+    global ContactDetails
+    ContactDetails = dict(OrderedDict(sorted(ContactDetails.items())))
 
 def insert():
     print("Enter Your Name: ")
@@ -14,17 +19,18 @@ def insert():
     contact = []
     con = input()
     contact.append(con)
-    print("want to enter alternative number ?(Y/N)")
-    mul = input()
-    if mul == "Y":
-        print("Enter Alternative number : ")
-        con = input()
-        contact.append(con)
-
     if checkUserExist(name):
-        print("User Already Exits..Try to enter diffrent name")
+        print("User Already Exits..Added this new number into already exits contact")
+        ContactDetails[name].append(con)
     else:
+        print("want to enter alternative number ?(Y/N)")
+        mul = input()
+        if mul == "Y":
+            print("Enter Alternative number : ")
+            con = input()
+            contact.append(con)
         ContactDetails[name] = contact
+        manageUser()
 
 def viewAll():
     print("***********************************")
