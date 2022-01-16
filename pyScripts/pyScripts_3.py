@@ -1,6 +1,12 @@
 
 ContactDetails = {}
 
+def checkUserExist(name):
+    for c in ContactDetails.keys():
+        if c == name:
+            return True;
+    return False
+
 def insert():
     print("Enter Your Name: ")
     name = input()
@@ -15,7 +21,10 @@ def insert():
         con = input()
         contact.append(con)
 
-    ContactDetails[name] = contact
+    if checkUserExist(name):
+        print("User Already Exits..Try to enter diffrent name")
+    else:
+        ContactDetails[name] = contact
 
 def viewAll():
     print("***********************************")
