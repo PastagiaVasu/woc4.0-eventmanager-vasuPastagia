@@ -1,0 +1,29 @@
+{% extends 'header.html' %}
+
+{% block body %}
+    <div class="container my-5 py-5">
+        <caption>List of Events</caption>
+        <table class="table table-success table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Event Name</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Start Date</th>
+                        <th scope="col">End Date</th>
+                        <th scope="col">Host Email</th>
+                    </tr>
+                </thead>
+            <tbody>
+                {% for event in events %}
+                    <tr>
+                        <th>{{ event.name }}</th>
+                        <td>{{ event.description }}</td>
+                        <td>{{ event.start_date }}</td>
+                        <td>{{ event.end_date }}</td>
+                        <td>{{ event.host_email }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

@@ -1,0 +1,63 @@
+{% extends 'header.html' %}
+
+{% block body %}
+    <div class="container my-5"><h1>Event Registratition</h1></div>
+    <div class="container my-5 py-5">
+        <form action="{% url 'eventInsert' %}" method="post" class="row g-3">
+            {% csrf_token %}
+            <div class="col-16">
+                <label for="inputName" class="form-label">Event Name</label>
+                <input type="text" name="eventName" class="form-control" id="inputName" required>
+            </div>
+            <div class="col-16">
+                <label for="floatingTextarea2" class="form-label">Description of the event</label>
+                <textarea class="form-control" name="eventDesc" id="floatingTextarea2" style="height: 100px" required></textarea>
+            </div>
+            <div class="col-16">
+                <label for="inputName" class="form-label">Poster Link</label>
+                <input type="text" class="form-control" name="posterLink" id="inputName" required>
+            </div>
+            <div class="col-md-6">
+                <label for="time" class="form-label">From (date/time)</label>
+                <input class="form-control" name="startDate" type="datetime-local" id="time1" onchange="ft_date()" required/>
+            </div>
+            <div class="col-md-6">
+                <label for="time" class="form-label">To (date/time)</label>
+                <input class="form-control" name="endDate" type="datetime-local" id="time2" onchange="ft_date()" required/>
+            </div>
+
+            <div class="col-md-12">
+                <label for="time" class="form-label">Registration deadline</label>
+                <input class="form-control" name="deadLine" type="date" id="time" required/>
+            </div>
+            <div class="col-md-6">
+                <label for="inputEmail4" class="form-label">Host Email</label>
+                <input type="email" name="hostEmail" class="form-control" id="inputEmail4" required>
+            </div>
+            <div class="col-md-6">
+                <label for="inputPassword4" class="form-label">Host Password</label>
+                <input type="password" name="hostPass" class="form-control" id="inputPassword4" required>
+            </div>
+
+            <div class="col-12 mt-4">
+                <button type="submit" class="btn gradient-custom" style="color: white">Register</button>
+                <button type="button" class="btn btn-light"><a href="{% url 'index' %}" style="text-decoration: none;color: black">Cancel</a></button>
+            </div>
+        </form>
+    </div>
+    <script>
+        function ft_date() {
+            //var today = new Date();
+            var f = document.querySelector('#time1');
+            var t = document.querySelector('#time2');
+            t.addEventListener('change', function () {
+
+                if (f.value > t.value) {
+                    alert("To(date/time) of an event should be greater than the from(date/time) !!");
+                    t.value = null;
+                    t.focus();
+                }
+            });
+        }
+    </script>
+{% endblock %}

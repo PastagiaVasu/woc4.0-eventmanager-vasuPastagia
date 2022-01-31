@@ -1,0 +1,68 @@
+{% extends 'header.html' %}
+
+{% block js %}
+<script>
+    function checkValue()
+    {
+        if (document.getElementById("type2").checked)
+        {
+            document.getElementById("noOfPe").style.visibility= 'visible';
+        }
+        else
+        {
+            document.getElementById("noOfPe").style.visibility= 'hidden';
+        }
+    }
+</script>
+{% endblock %}
+
+{% block body %}
+    <div class="container my-5"><h1>Participant Registratition</h1></div>
+    <div class="container my-5 py-5">
+        <form action="{% url 'participantInsert' %}" method="post" class="row g-3">
+            {% csrf_token %}
+            <div class="col-16">
+                <label for="inputName" class="form-label">Participant Name</label>
+                <input type="text" name="name" class="form-control" id="inputName" required>
+            </div>
+            <div class="col-16">
+                <label for="floatingTextarea2" class="form-label">Contact Number</label>
+                <input type="number" name="contact_no" class="form-control" id="inputName" required>
+            </div>
+            <div class="col-16">
+                <label for="inputName" class="form-label">Email</label>
+                <input type="email" name="email" class="form-control" id="inputEmail4" required>
+            </div>
+            <div class="col-md-16">
+                <label for="time" class="form-label">Select Event</label>
+                <select class="form-select" name="events_t">
+                    <option id="0">-- Select Event--</option>
+                    {% for event in events %}
+                        <option id="{{ event.name }}" value="{{ event.name }}">{{ event.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-16">
+                <label for="time" class="form-label">Registration Type</label>
+                <div class="form-control">
+                    <div class="form-check">
+                        <input type="radio" checked class="form-check-input" value="ind" onchange="checkValue()" name="regType" id="type1">
+                        <h6 style="padding-left:10px">Individual</h6>
+                    </div>
+                    <div class="form-check">
+                        <input type="radio" name="regType" class="form-check-input" onchange="checkValue()" value="group" id="type2" >
+                        <h6 style="padding-left:10px">Group</h6>
+                    </div>
+                </div>
+            </div>
+            <div class="col-16" id="noOfPe" style="visibility: hidden">
+                <label for="floatingTextarea2" class="form-label">No. of People</label>
+                <input type="number" maxlength="100" name="no_of_people" class="form-control" id="inputName" required>
+            </div>
+            <div class="col-12 mt-4">
+                <button type="submit" class="btn gradient-custom" style="color: white">Register</button>
+                <button type="button" class="btn btn-light"><a href="{% url 'index' %}" style="text-decoration: none;color: black">Cancel</a></button>
+            </div>
+        </form>
+    </div>
+{% endblock %}

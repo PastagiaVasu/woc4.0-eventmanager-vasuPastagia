@@ -1,0 +1,49 @@
+{% extends 'header.html' %}
+
+{% block js %}
+<style>
+    .gradient-custom {
+        background: #6a11cb;
+        background: -webkit-linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));
+        background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1))
+    }
+</style>
+{% endblock %}
+
+{% block body %}
+<section class="vh-100 gradient-custom">
+  <div class="container py-4 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-90">
+      <div class="col-10 col-md-8 col-lg-6 col-xl-5">
+        <div class="card bg-dark text-white" style="border-radius: 1rem;">
+          <div class="card-body p-5 text-center">
+            <div class="mb-md-3 mt-md-2 pb-3">
+              <h2 class="fw-bold mb-2 text-uppercase">Login</h2>
+              <p class="text-white-50 mb-5">Please enter your login and password!</p>
+              <form action="{% url 'login' %}" method="post">
+                  {% csrf_token %}
+                <div class="form-outline form-white mb-4">
+                    <input type="email" id="hostEmail" name="hostEmail" class="form-control form-control-lg" />
+                    <label class="form-label" for="typeEmailX">Email</label>
+                </div>
+                <div class="form-outline form-white mb-4">
+                    <input type="password" id="hostPass" name="hostPass" class="form-control form-control-lg" />
+                    <label class="form-label" for="typePasswordX">Password</label>
+                </div>
+              {% if error %}
+                  <div>
+                    <span style="color: red">
+                        {{ error }}
+                    </span>
+                  </div>
+              {% endif %}
+                <button class="btn btn-outline-light btn-lg px-5" type="submit">Login</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
