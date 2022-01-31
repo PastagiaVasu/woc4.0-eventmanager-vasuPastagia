@@ -58,9 +58,9 @@ def eventReg(request):
     return HttpResponse(template.render(context, request))
 
 def sendEmail(email, msg):
-    sender_email = "woceventregapp@gmail.com"
+    sender_email = "email@gmail.com"
     receiver_email = email
-    password = "woc04ema"
+    password = "*******"
 
     server = smtplib.SMTP('smtp.gmail.com', 587)
     server.starttls()
@@ -68,12 +68,12 @@ def sendEmail(email, msg):
     server.sendmail(sender_email, receiver_email, msg)
 
 def sendSms(pnumber, msg):
-    account_sid = "AC4d5230a161c4c9e56cbb6cb9bf8193fb"
-    auth_token = "6bf1fee70d465af3decb777cf0bbfa2b"
+    account_sid = "SID"
+    auth_token = "TOCKEN"
     client = Client(account_sid, auth_token)
     sms = client.messages.create(
         body=msg,
-        from_='+16065176247',
+        from_='phone number',
         to=pnumber
     )
     print(sms.sid)
